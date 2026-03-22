@@ -2,6 +2,7 @@ import SwiftUI
 import AVFoundation
 import Combine
 import os
+import TheTrimmerCore
 
 private let logger = Logger(subsystem: "com.local.TheTrimmer", category: "TrimmerVM")
 
