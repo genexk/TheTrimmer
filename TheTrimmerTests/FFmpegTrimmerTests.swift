@@ -15,6 +15,7 @@ struct FFmpegTrimmerTests {
             trimPoint: 65.5
         )
         #expect(args == [
+            "-nostdin",
             "-i", "/tmp/video.mov",
             "-to", "65.500",
             "-c", "copy",
@@ -33,6 +34,7 @@ struct FFmpegTrimmerTests {
             trimPoint: 120.0
         )
         #expect(args == [
+            "-nostdin",
             "-ss", "120.000",
             "-i", "/tmp/video.mov",
             "-c", "copy",

@@ -15,9 +15,9 @@ struct FFmpegTrimmer {
         let timeStr = String(format: "%.3f", trimPoint)
         switch mode {
         case .keepLeft:
-            return ["-i", input.path, "-to", timeStr, "-c", "copy", "-y", output.path]
+            return ["-nostdin", "-i", input.path, "-to", timeStr, "-c", "copy", "-y", output.path]
         case .keepRight:
-            return ["-ss", timeStr, "-i", input.path, "-c", "copy", "-y", output.path]
+            return ["-nostdin", "-ss", timeStr, "-i", input.path, "-c", "copy", "-y", output.path]
         }
     }
 
@@ -60,6 +60,7 @@ struct FFmpegTrimmer {
         let stderrPipe = Pipe()
         process.standardError = stderrPipe
         process.standardOutput = FileHandle.nullDevice
+        process.standardInput = FileHandle.nullDevice  // prevent ffmpeg waiting for terminal input
 
         let stderrData = Task.detached { () -> Data in
             stderrPipe.fileHandleForReading.readDataToEndOfFile()
