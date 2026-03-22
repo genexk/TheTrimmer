@@ -1,0 +1,15 @@
+version: "Apple Swift version 6.1.2 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)"
+options: "4246b2a635c224f8dad10fbe08825c87e6adb386484f86a29b5643a063204e07"
+build_start_time: [1774202250, 164702000]
+build_end_time: [1774202251, 94352000]
+inputs:
+  "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/ContentView.swift": [1774201670, 538328766]
+  "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Models/FileNode.swift": [1774201534, 732477215]
+  "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Services/FFmpegTrimmer.swift": [1774202243, 458932513]
+  "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/TheTrimmerApp.swift": [1774200906, 317658393]
+  "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/ViewModels/FileBrowserViewModel.swift": [1774201534, 962965546]
+  "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/ViewModels/TrimmerViewModel.swift": [1774201028, 697549361]
+  "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Views/FileBrowserView.swift": [1774201590, 277734852]
+  "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Views/TimelineView.swift": [1774201020, 624805847]
+  "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Views/VideoDetailView.swift": [1774201664, 551201081]
+  "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Views/VideoPlayerView.swift": [1774201010, 792141928]

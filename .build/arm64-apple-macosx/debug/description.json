@@ -32,6 +32,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Models/FileNode.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Services/FFmpegTrimmer.swift"
         },
         {
@@ -40,11 +44,23 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/ViewModels/FileBrowserViewModel.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/ViewModels/TrimmerViewModel.swift"
         },
         {
           "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Views/FileBrowserView.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Views/TimelineView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Views/VideoDetailView.swift"
         },
         {
           "kind" : "file",
@@ -64,10 +80,14 @@
       "moduleOutputPath" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/Modules/TheTrimmer.swiftmodule",
       "objects" : [
         "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/ContentView.swift.o",
+        "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/FileNode.swift.o",
         "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/FFmpegTrimmer.swift.o",
         "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/TheTrimmerApp.swift.o",
+        "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/FileBrowserViewModel.swift.o",
         "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/TrimmerViewModel.swift.o",
+        "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/FileBrowserView.swift.o",
         "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/TimelineView.swift.o",
+        "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/VideoDetailView.swift.o",
         "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/VideoPlayerView.swift.o"
       ],
       "otherArguments" : [
@@ -128,6 +148,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/FileNode.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/FFmpegTrimmer.swift.o"
         },
         {
@@ -136,11 +160,23 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/FileBrowserViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/TrimmerViewModel.swift.o"
         },
         {
           "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/FileBrowserView.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/TimelineView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/VideoDetailView.swift.o"
         },
         {
           "kind" : "file",
@@ -154,10 +190,14 @@
       "prepareForIndexing" : false,
       "sources" : [
         "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/ContentView.swift",
+        "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Models/FileNode.swift",
         "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Services/FFmpegTrimmer.swift",
         "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/TheTrimmerApp.swift",
+        "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/ViewModels/FileBrowserViewModel.swift",
         "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/ViewModels/TrimmerViewModel.swift",
+        "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Views/FileBrowserView.swift",
         "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Views/TimelineView.swift",
+        "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Views/VideoDetailView.swift",
         "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Views/VideoPlayerView.swift"
       ],
       "tempsPath" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build",
@@ -266,6 +306,10 @@
       "inputs" : [
         {
           "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/TheTrimmerTests/FFmpegTrimmerTests.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kun.xu/projects/TheTrimmer/TheTrimmerTests/TrimmerViewModelTests.swift"
         },
         {
@@ -285,6 +329,7 @@
       "moduleName" : "TheTrimmerTests",
       "moduleOutputPath" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/Modules/TheTrimmerTests.swiftmodule",
       "objects" : [
+        "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmerTests.build/FFmpegTrimmerTests.swift.o",
         "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmerTests.build/TrimmerViewModelTests.swift.o"
       ],
       "otherArguments" : [
@@ -340,6 +385,10 @@
       "outputs" : [
         {
           "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmerTests.build/FFmpegTrimmerTests.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmerTests.build/TrimmerViewModelTests.swift.o"
         },
         {
@@ -349,6 +398,7 @@
       ],
       "prepareForIndexing" : false,
       "sources" : [
+        "/Users/kun.xu/projects/TheTrimmer/TheTrimmerTests/FFmpegTrimmerTests.swift",
         "/Users/kun.xu/projects/TheTrimmer/TheTrimmerTests/TrimmerViewModelTests.swift"
       ],
       "tempsPath" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmerTests.build",
@@ -368,10 +418,14 @@
       "-incremental",
       "-c",
       "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/ContentView.swift",
+      "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Models/FileNode.swift",
       "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Services/FFmpegTrimmer.swift",
       "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/TheTrimmerApp.swift",
+      "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/ViewModels/FileBrowserViewModel.swift",
       "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/ViewModels/TrimmerViewModel.swift",
+      "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Views/FileBrowserView.swift",
       "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Views/TimelineView.swift",
+      "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Views/VideoDetailView.swift",
       "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Views/VideoPlayerView.swift",
       "-I",
       "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/Modules",
@@ -496,6 +550,7 @@
       "thetrimmer",
       "-incremental",
       "-c",
+      "/Users/kun.xu/projects/TheTrimmer/TheTrimmerTests/FFmpegTrimmerTests.swift",
       "/Users/kun.xu/projects/TheTrimmer/TheTrimmerTests/TrimmerViewModelTests.swift",
       "-I",
       "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/Modules",
@@ -609,6 +664,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Models/FileNode.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Services/FFmpegTrimmer.swift"
         },
         {
@@ -617,11 +676,23 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/ViewModels/FileBrowserViewModel.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/ViewModels/TrimmerViewModel.swift"
         },
         {
           "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Views/FileBrowserView.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Views/TimelineView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Views/VideoDetailView.swift"
         },
         {
           "kind" : "file",
@@ -647,6 +718,18 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/FileBrowserView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/FileBrowserViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/FileNode.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/TheTrimmerApp.swift.o"
         },
         {
@@ -656,6 +739,10 @@
         {
           "kind" : "file",
           "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/TrimmerViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/VideoDetailView.swift.o"
         },
         {
           "kind" : "file",
@@ -695,6 +782,18 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/FileBrowserView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/FileBrowserViewModel.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/FileNode.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/TheTrimmerApp.swift.o"
         },
         {
@@ -707,11 +806,19 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/VideoDetailView.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/VideoPlayerView.swift.o"
         },
         {
           "kind" : "file",
           "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmerPackageTests.build/runner.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmerTests.build/FFmpegTrimmerTests.swift.o"
         },
         {
           "kind" : "file",
@@ -726,6 +833,10 @@
         {
           "kind" : "virtual",
           "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/kun.xu/projects/TheTrimmer/TheTrimmerTests/FFmpegTrimmerTests.swift"
         },
         {
           "kind" : "file",

@@ -1,4 +1,7 @@
 import Foundation
+import os
+
+private let logger = Logger(subsystem: "com.local.TheTrimmer", category: "FFmpegTrimmer")
 
 enum TrimMode {
     case keepLeft
@@ -48,6 +51,7 @@ struct FFmpegTrimmer {
         }
 
         let args = buildArguments(input: input, output: output, mode: mode, trimPoint: trimPoint)
+        logger.info("Starting trim: ffmpeg \(args.joined(separator: " "), privacy: .public)")
 
         let process = Process()
         process.executableURL = URL(fileURLWithPath: ffmpegPath)
@@ -61,20 +65,34 @@ struct FFmpegTrimmer {
             stderrPipe.fileHandleForReading.readDataToEndOfFile()
         }
 
-        try process.run()
-
+        // CRITICAL: set terminationHandler BEFORE run() to avoid race condition
+        // where process finishes before handler is registered
+        let startTime = CFAbsoluteTimeGetCurrent()
         try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-            process.terminationHandler = { _ in
+            process.terminationHandler = { proc in
+                let elapsed = CFAbsoluteTimeGetCurrent() - startTime
+                logger.info("ffmpeg exited with status \(proc.terminationStatus) in \(String(format: "%.2f", elapsed))s")
                 continuation.resume()
+            }
+            do {
+                try process.run()
+                logger.info("ffmpeg process launched (pid: \(process.processIdentifier))")
+            } catch {
+                logger.error("Failed to launch ffmpeg: \(error.localizedDescription)")
+                continuation.resume(throwing: error)
             }
         }
 
         guard process.terminationStatus == 0 else {
             let errorData = await stderrData.value
             let errorMsg = String(data: errorData, encoding: .utf8) ?? "Unknown error"
+            logger.error("ffmpeg failed: \(errorMsg, privacy: .public)")
             try? FileManager.default.removeItem(at: output)
             throw TrimError.ffmpegFailed(errorMsg)
         }
+
+        let outputSize = (try? FileManager.default.attributesOfItem(atPath: output.path)[.size] as? Int) ?? 0
+        logger.info("Trim complete: \(output.lastPathComponent) (\(outputSize / 1024 / 1024)MB)")
 
         if overwrite {
             let backup = input.deletingLastPathComponent()
@@ -82,6 +100,7 @@ struct FFmpegTrimmer {
             try FileManager.default.moveItem(at: input, to: backup)
             try FileManager.default.moveItem(at: output, to: input)
             try? FileManager.default.removeItem(at: backup)
+            logger.info("Overwrite complete — original replaced")
             return input
         }
 
