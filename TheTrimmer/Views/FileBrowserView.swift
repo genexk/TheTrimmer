@@ -19,6 +19,14 @@ struct FileBrowserView: View {
                 }
                 .buttonStyle(.borderless)
 
+                if viewModel.canGoUp {
+                    Button(action: { viewModel.goUp() }) {
+                        Image(systemName: "chevron.left")
+                    }
+                    .buttonStyle(.borderless)
+                    .help("Go up one directory")
+                }
+
                 Spacer()
 
                 Button(action: { viewModel.showDetails.toggle() }) {
@@ -35,6 +43,24 @@ struct FileBrowserView: View {
             }
             .padding(.horizontal, 8)
             .padding(.vertical, 6)
+
+            // Current directory path
+            if let dir = viewModel.currentDirectory {
+                HStack {
+                    Image(systemName: "folder")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                    Text(dir.lastPathComponent)
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                        .truncationMode(.head)
+                    Spacer()
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 3)
+                .background(Color(nsColor: .controlBackgroundColor).opacity(0.5))
+            }
 
             Divider()
 
@@ -69,14 +95,18 @@ struct FileBrowserView: View {
                 }
 
                 // File list
-                ScrollViewReader { proxy in
-                    List(viewModel.sortedFiles, selection: $viewModel.selectedFile) { file in
-                        fileRow(file)
-                            .tag(file.url)
-                    }
-                    .listStyle(.sidebar)
-                    .onChange(of: viewModel.selectedFile) { _, newValue in
-                        if let url = newValue {
+                List(viewModel.sortedFiles, selection: $viewModel.selectedFile) { file in
+                    fileRow(file)
+                        .tag(file.url)
+                }
+                .listStyle(.sidebar)
+                .onChange(of: viewModel.selectedFile) { _, newValue in
+                    guard let url = newValue else { return }
+                    if let file = viewModel.sortedFiles.first(where: { $0.url == url }) {
+                        if file.isDirectory {
+                            viewModel.selectedFile = nil
+                            viewModel.navigateTo(url)
+                        } else {
                             onSelectFile(url)
                         }
                     }
@@ -87,32 +117,38 @@ struct FileBrowserView: View {
 
     @ViewBuilder
     private func fileRow(_ file: FileNode) -> some View {
+        let icon = file.isDirectory ? "folder" : "film"
         if viewModel.showDetails {
             HStack(spacing: 0) {
-                Label(file.name, systemImage: "film")
+                Label(file.name, systemImage: icon)
                     .lineLimit(1)
                     .truncationMode(.middle)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
-                if let date = file.creationDate {
-                    Text(Self.dateFormatter.string(from: date))
+                if !file.isDirectory {
+                    if let date = file.creationDate {
+                        Text(Self.dateFormatter.string(from: date))
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                            .frame(width: 110, alignment: .leading)
+                    } else {
+                        Text("—")
+                            .font(.caption2)
+                            .foregroundStyle(.tertiary)
+                            .frame(width: 110, alignment: .leading)
+                    }
+
+                    Text(file.formattedSize)
                         .font(.caption2)
                         .foregroundStyle(.secondary)
-                        .frame(width: 110, alignment: .leading)
+                        .frame(width: 65, alignment: .trailing)
                 } else {
-                    Text("—")
-                        .font(.caption2)
-                        .foregroundStyle(.tertiary)
-                        .frame(width: 110, alignment: .leading)
+                    Spacer()
+                        .frame(width: 175)
                 }
-
-                Text(file.formattedSize)
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
-                    .frame(width: 65, alignment: .trailing)
             }
         } else {
-            Label(file.name, systemImage: "film")
+            Label(file.name, systemImage: icon)
                 .lineLimit(1)
                 .truncationMode(.middle)
         }

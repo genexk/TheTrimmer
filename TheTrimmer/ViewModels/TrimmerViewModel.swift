@@ -1,6 +1,9 @@
 import SwiftUI
 import AVFoundation
 import Combine
+import os
+
+private let logger = Logger(subsystem: "com.local.TheTrimmer", category: "TrimmerVM")
 
 @MainActor
 class TrimmerViewModel: ObservableObject {
@@ -23,6 +26,7 @@ class TrimmerViewModel: ObservableObject {
     }
 
     private func cleanup() {
+        logger.debug("Cleaning up player state")
         if let existing = timeObserver {
             player?.removeTimeObserver(existing)
             timeObserver = nil
@@ -36,6 +40,7 @@ class TrimmerViewModel: ObservableObject {
     }
 
     func loadFile(_ url: URL) {
+        logger.info("Loading file: \(url.lastPathComponent, privacy: .public)")
         cleanup()
 
         fileURL = url
@@ -48,6 +53,9 @@ class TrimmerViewModel: ObservableObject {
             if let dur {
                 self.duration = dur.seconds
                 self.trimPoint = dur.seconds / 2
+                logger.info("Duration loaded: \(String(format: "%.1f", dur.seconds))s, trim point set to \(String(format: "%.1f", dur.seconds / 2))s")
+            } else {
+                logger.warning("Failed to load duration for \(url.lastPathComponent, privacy: .public)")
             }
         }
 
@@ -59,8 +67,10 @@ class TrimmerViewModel: ObservableObject {
         guard let player else { return }
         if isPlaying {
             player.pause()
+            logger.debug("Paused")
         } else {
             player.play()
+            logger.debug("Playing")
         }
         isPlaying.toggle()
     }
@@ -80,14 +90,19 @@ class TrimmerViewModel: ObservableObject {
     }
 
     private func performTrim(mode: TrimMode) async {
-        guard let fileURL, canTrim else { return }
+        guard let fileURL, canTrim else {
+            logger.warning("Trim skipped: fileURL=\(self.fileURL?.lastPathComponent ?? "nil", privacy: .public), canTrim=\(self.canTrim)")
+            return
+        }
         guard FileManager.default.fileExists(atPath: trimmer.ffmpegPath) else {
+            logger.error("ffmpeg not found at \(self.trimmer.ffmpegPath)")
             statusMessage = "Error: ffmpeg not found. Install with: brew install ffmpeg"
             return
         }
 
         isTrimming = true
         let modeLabel = mode == .keepLeft ? "Keep Left" : "Keep Right"
+        logger.info("Starting trim: \(modeLabel, privacy: .public) at \(String(format: "%.3f", self.trimPoint))s on \(fileURL.lastPathComponent, privacy: .public), overwrite=\(self.overwriteOriginal)")
         statusMessage = "Trimming (\(modeLabel))..."
 
         do {
@@ -97,11 +112,13 @@ class TrimmerViewModel: ObservableObject {
                 trimPoint: trimPoint,
                 overwrite: overwriteOriginal
             )
+            logger.info("Trim succeeded: \(result.lastPathComponent, privacy: .public)")
             statusMessage = "Done: \(result.lastPathComponent)"
             if overwriteOriginal {
                 loadFile(result)
             }
         } catch {
+            logger.error("Trim failed: \(error.localizedDescription, privacy: .public)")
             statusMessage = "Error: \(error.localizedDescription)"
         }
 
