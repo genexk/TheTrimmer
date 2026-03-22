@@ -5,14 +5,15 @@ struct ContentView: View {
     @StateObject private var browserVM = FileBrowserViewModel()
 
     var body: some View {
-        NavigationSplitView {
+        HSplitView {
             FileBrowserView(viewModel: browserVM) { url in
                 browserVM.selectedFile = url
                 trimmerVM.loadFile(url)
             }
-            .navigationSplitViewColumnWidth(min: 250, ideal: 400, max: 500)
-        } detail: {
+            .frame(minWidth: 200, idealWidth: 400, maxWidth: 600)
+
             VideoDetailView(viewModel: trimmerVM)
+                .frame(minWidth: 500)
         }
         .frame(minWidth: 900, minHeight: 600)
         .onAppear {
