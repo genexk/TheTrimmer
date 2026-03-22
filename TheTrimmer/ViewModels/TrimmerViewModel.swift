@@ -15,7 +15,7 @@ class TrimmerViewModel: ObservableObject {
 
     private let trimmer = FFmpegTrimmer()
     private var timeObserver: Any?
-    var player: AVPlayer?
+    @Published var player: AVPlayer?
 
     var canTrim: Bool {
         guard fileURL != nil, duration > 0 else { return false }
@@ -39,14 +39,9 @@ class TrimmerViewModel: ObservableObject {
         cleanup()
 
         fileURL = url
-        let asset = AVAsset(url: url)
+        let asset = AVURLAsset(url: url)
         let playerItem = AVPlayerItem(asset: asset)
-
-        if player == nil {
-            player = AVPlayer(playerItem: playerItem)
-        } else {
-            player?.replaceCurrentItem(with: playerItem)
-        }
+        player = AVPlayer(playerItem: playerItem)
 
         Task {
             let dur = try? await asset.load(.duration)

@@ -58,9 +58,21 @@ struct VideoDetailView: View {
             )
 
             if viewModel.duration > 0 {
-                Text("Trim point: \(formatTime(viewModel.trimPoint))")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                HStack(spacing: 8) {
+                    Text("Trim point: \(formatTime(viewModel.trimPoint))")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+
+                    Button {
+                        viewModel.trimPoint = viewModel.currentTime
+                    } label: {
+                        Label("Snap to playhead", systemImage: "arrow.down.to.line")
+                            .font(.caption)
+                    }
+                    .buttonStyle(.borderless)
+                    .help("Set trim point to current playback position (S)")
+                    .keyboardShortcut("s", modifiers: [])
+                }
             }
 
             HStack(spacing: 16) {

@@ -10,7 +10,7 @@ struct ContentView: View {
                 browserVM.selectedFile = url
                 trimmerVM.loadFile(url)
             }
-            .navigationSplitViewColumnWidth(min: 200, ideal: 250, max: 350)
+            .navigationSplitViewColumnWidth(min: 250, ideal: 400, max: 500)
         } detail: {
             VideoDetailView(viewModel: trimmerVM)
         }

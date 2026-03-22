@@ -4,8 +4,15 @@ struct FileBrowserView: View {
     @ObservedObject var viewModel: FileBrowserViewModel
     let onSelectFile: (URL) -> Void
 
+    private static let dateFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "yyyy-MM-dd HH:mm"
+        return f
+    }()
+
     var body: some View {
         VStack(spacing: 0) {
+            // Toolbar
             HStack {
                 Button(action: { viewModel.openFolder() }) {
                     Label("Add Folder", systemImage: "folder.badge.plus")
@@ -13,6 +20,12 @@ struct FileBrowserView: View {
                 .buttonStyle(.borderless)
 
                 Spacer()
+
+                Button(action: { viewModel.showDetails.toggle() }) {
+                    Image(systemName: viewModel.showDetails ? "list.bullet" : "list.dash")
+                }
+                .buttonStyle(.borderless)
+                .help(viewModel.showDetails ? "Hide details" : "Show details")
 
                 Button(action: { viewModel.refresh() }) {
                     Image(systemName: "arrow.clockwise")
@@ -37,45 +50,79 @@ struct FileBrowserView: View {
                     Spacer()
                 }
             } else {
-                List(selection: $viewModel.selectedFile) {
-                    ForEach(viewModel.roots) { root in
-                        FileTreeNode(node: root, selectedFile: viewModel.selectedFile, onSelectFile: onSelectFile)
+                // Column headers
+                if viewModel.showDetails {
+                    HStack(spacing: 0) {
+                        sortButton(.name)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        sortButton(.date)
+                            .frame(width: 110, alignment: .leading)
+                        sortButton(.size)
+                            .frame(width: 65, alignment: .trailing)
+                    }
+                    .font(.caption2)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 4)
+                    .background(Color(nsColor: .controlBackgroundColor))
+
+                    Divider()
+                }
+
+                // File list
+                ScrollViewReader { proxy in
+                    List(viewModel.sortedFiles, selection: $viewModel.selectedFile) { file in
+                        fileRow(file)
+                            .tag(file.url)
+                    }
+                    .listStyle(.sidebar)
+                    .onChange(of: viewModel.selectedFile) { _, newValue in
+                        if let url = newValue {
+                            onSelectFile(url)
+                        }
                     }
                 }
-                .listStyle(.sidebar)
             }
         }
     }
-}
 
-struct FileTreeNode: View {
-    let node: FileNode
-    let selectedFile: URL?
-    let onSelectFile: (URL) -> Void
+    @ViewBuilder
+    private func fileRow(_ file: FileNode) -> some View {
+        if viewModel.showDetails {
+            HStack(spacing: 0) {
+                Label(file.name, systemImage: "film")
+                    .lineLimit(1)
+                    .truncationMode(.middle)
+                    .frame(maxWidth: .infinity, alignment: .leading)
 
-    var body: some View {
-        if node.isDirectory {
-            DisclosureGroup {
-                if let children = node.children {
-                    ForEach(children) { child in
-                        FileTreeNode(node: child, selectedFile: selectedFile, onSelectFile: onSelectFile)
-                    }
+                if let date = file.creationDate {
+                    Text(Self.dateFormatter.string(from: date))
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                        .frame(width: 110, alignment: .leading)
+                } else {
+                    Text("—")
+                        .font(.caption2)
+                        .foregroundStyle(.tertiary)
+                        .frame(width: 110, alignment: .leading)
                 }
-            } label: {
-                Label(node.name, systemImage: "folder.fill")
-                    .foregroundStyle(.primary)
+
+                Text(file.formattedSize)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                    .frame(width: 65, alignment: .trailing)
             }
         } else {
-            HStack {
-                Label(node.name, systemImage: "film")
-                Spacer()
-            }
-            .contentShape(Rectangle())
-            .background(selectedFile == node.url ? Color.accentColor.opacity(0.2) : Color.clear)
-            .cornerRadius(4)
-            .onTapGesture {
-                onSelectFile(node.url)
-            }
+            Label(file.name, systemImage: "film")
+                .lineLimit(1)
+                .truncationMode(.middle)
         }
+    }
+
+    private func sortButton(_ field: SortField) -> some View {
+        Button(action: { viewModel.toggleSort(field) }) {
+            Text(field.rawValue + viewModel.sortIndicator(for: field))
+                .fontWeight(viewModel.sortField == field ? .semibold : .regular)
+        }
+        .buttonStyle(.plain)
     }
 }
