@@ -1,0 +1,127 @@
+import SwiftUI
+import AVFoundation
+import Combine
+
+@MainActor
+class TrimmerViewModel: ObservableObject {
+    @Published var fileURL: URL?
+    @Published var duration: Double = 0
+    @Published var currentTime: Double = 0
+    @Published var trimPoint: Double = 0
+    @Published var isPlaying: Bool = false
+    @Published var overwriteOriginal: Bool = false
+    @Published var statusMessage: String = "Ready"
+    @Published var isTrimming: Bool = false
+
+    private let trimmer = FFmpegTrimmer()
+    private var timeObserver: Any?
+    var player: AVPlayer?
+
+    var canTrim: Bool {
+        guard fileURL != nil, duration > 0 else { return false }
+        return trimPoint > 0 && trimPoint < duration
+    }
+
+    private func cleanup() {
+        if let existing = timeObserver {
+            player?.removeTimeObserver(existing)
+            timeObserver = nil
+        }
+        player?.pause()
+        player?.replaceCurrentItem(with: nil)
+        isPlaying = false
+        currentTime = 0
+        duration = 0
+        trimPoint = 0
+    }
+
+    func loadFile(_ url: URL) {
+        cleanup()
+
+        fileURL = url
+        let asset = AVAsset(url: url)
+        let playerItem = AVPlayerItem(asset: asset)
+
+        if player == nil {
+            player = AVPlayer(playerItem: playerItem)
+        } else {
+            player?.replaceCurrentItem(with: playerItem)
+        }
+
+        Task {
+            let dur = try? await asset.load(.duration)
+            if let dur {
+                self.duration = dur.seconds
+                self.trimPoint = dur.seconds / 2
+            }
+        }
+
+        statusMessage = "Loaded: \(url.lastPathComponent)"
+        setupTimeObserver()
+    }
+
+    func togglePlayPause() {
+        guard let player else { return }
+        if isPlaying {
+            player.pause()
+        } else {
+            player.play()
+        }
+        isPlaying.toggle()
+    }
+
+    func seek(to time: Double) {
+        let cmTime = CMTime(seconds: time, preferredTimescale: 600)
+        player?.seek(to: cmTime, toleranceBefore: .zero, toleranceAfter: .zero)
+        currentTime = time
+    }
+
+    func trimLeft() async {
+        await performTrim(mode: .keepLeft)
+    }
+
+    func trimRight() async {
+        await performTrim(mode: .keepRight)
+    }
+
+    private func performTrim(mode: TrimMode) async {
+        guard let fileURL, canTrim else { return }
+        guard FileManager.default.fileExists(atPath: trimmer.ffmpegPath) else {
+            statusMessage = "Error: ffmpeg not found. Install with: brew install ffmpeg"
+            return
+        }
+
+        isTrimming = true
+        let modeLabel = mode == .keepLeft ? "Keep Left" : "Keep Right"
+        statusMessage = "Trimming (\(modeLabel))..."
+
+        do {
+            let result = try await trimmer.trim(
+                input: fileURL,
+                mode: mode,
+                trimPoint: trimPoint,
+                overwrite: overwriteOriginal
+            )
+            statusMessage = "Done: \(result.lastPathComponent)"
+            if overwriteOriginal {
+                loadFile(result)
+            }
+        } catch {
+            statusMessage = "Error: \(error.localizedDescription)"
+        }
+
+        isTrimming = false
+    }
+
+    private func setupTimeObserver() {
+        if let existing = timeObserver {
+            player?.removeTimeObserver(existing)
+        }
+        let interval = CMTime(seconds: 0.1, preferredTimescale: 600)
+        timeObserver = player?.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
+            Task { @MainActor in
+                self?.currentTime = time.seconds
+            }
+        }
+    }
+}

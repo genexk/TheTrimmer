@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmerPackageTests.build/master.swiftdeps"
+  },
+  "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmerPackageTests.derived/runner.swift": {
+    "dependencies": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmerPackageTests.build/runner.d",
+    "object": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmerPackageTests.build/runner.swift.o",
+    "swiftmodule": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmerPackageTests.build/runner~partial.swiftmodule",
+    "swift-dependencies": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmerPackageTests.build/runner.swiftdeps"
+  }
+}

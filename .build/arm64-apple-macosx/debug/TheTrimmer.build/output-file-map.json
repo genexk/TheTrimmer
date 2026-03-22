@@ -1,0 +1,41 @@
+{
+  "": {
+    "swift-dependencies": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/master.swiftdeps"
+  },
+  "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/ContentView.swift": {
+    "dependencies": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/ContentView.d",
+    "object": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/ContentView.swift.o",
+    "swiftmodule": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/ContentView~partial.swiftmodule",
+    "swift-dependencies": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/ContentView.swiftdeps"
+  },
+  "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Services/FFmpegTrimmer.swift": {
+    "dependencies": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/FFmpegTrimmer.d",
+    "object": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/FFmpegTrimmer.swift.o",
+    "swiftmodule": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/FFmpegTrimmer~partial.swiftmodule",
+    "swift-dependencies": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/FFmpegTrimmer.swiftdeps"
+  },
+  "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/TheTrimmerApp.swift": {
+    "dependencies": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/TheTrimmerApp.d",
+    "object": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/TheTrimmerApp.swift.o",
+    "swiftmodule": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/TheTrimmerApp~partial.swiftmodule",
+    "swift-dependencies": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/TheTrimmerApp.swiftdeps"
+  },
+  "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/ViewModels/TrimmerViewModel.swift": {
+    "dependencies": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/TrimmerViewModel.d",
+    "object": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/TrimmerViewModel.swift.o",
+    "swiftmodule": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/TrimmerViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/TrimmerViewModel.swiftdeps"
+  },
+  "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Views/TimelineView.swift": {
+    "dependencies": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/TimelineView.d",
+    "object": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/TimelineView.swift.o",
+    "swiftmodule": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/TimelineView~partial.swiftmodule",
+    "swift-dependencies": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/TimelineView.swiftdeps"
+  },
+  "/Users/kun.xu/projects/TheTrimmer/TheTrimmer/Views/VideoPlayerView.swift": {
+    "dependencies": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/VideoPlayerView.d",
+    "object": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/VideoPlayerView.swift.o",
+    "swiftmodule": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/VideoPlayerView~partial.swiftmodule",
+    "swift-dependencies": "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmer.build/VideoPlayerView.swiftdeps"
+  }
+}
