@@ -1,4 +1,0 @@
-module TheTrimmerPackageTests {
-    header "/Users/kun.xu/projects/TheTrimmer/.build/arm64-apple-macosx/debug/TheTrimmerPackageTests.build/TheTrimmerPackageTests-Swift.h"
-    requires objc
-}
