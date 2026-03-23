@@ -5,7 +5,7 @@ import TheTrimmerCore
 struct ExtractCommand: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         commandName: "extract",
-        abstract: "Extract a time range from video (keep only start to end)"
+        abstract: "Extract a time range from media (keep only start to end)"
     )
 
     @Argument(help: "Input video file")

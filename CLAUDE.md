@@ -1,7 +1,7 @@
 # TheTrimmer — Project Instructions
 
 ## Overview
-Native macOS SwiftUI video trimmer using ffmpeg stream copy for O(1) trimming.
+Native macOS SwiftUI media trimmer (video + audio) using ffmpeg stream copy for O(1) trimming.
 
 ## Build & Run
 - `swift build` — compile
@@ -30,7 +30,7 @@ private let logger = Logger(subsystem: "com.local.TheTrimmer", category: "Catego
 ## Architecture
 - `TheTrimmerApp.swift` — App entry point
 - `ContentView.swift` — Main layout with custom resizable split view
-- `Views/` — SwiftUI views (FileBrowserView, VideoDetailView, VideoPlayerView, TimelineView)
+- `Views/` — SwiftUI views (FileBrowserView, VideoDetailView, VideoPlayerView, AudioWaveformView, TimelineView)
 - `ViewModels/` — TrimmerViewModel (player + trim state), FileBrowserViewModel (directory navigation)
 - `Services/FFmpegTrimmer.swift` — ffmpeg process management with stream copy
 - `Models/FileNode.swift` — File tree model with metadata

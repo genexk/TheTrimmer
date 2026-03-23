@@ -10,7 +10,15 @@ struct VideoDetailView: View {
         VStack(spacing: 12) {
             ZStack {
                 if let player = viewModel.player {
-                    VideoPlayerView(player: player)
+                    if viewModel.isAudioFile {
+                        AudioWaveformView(
+                            player: player,
+                            currentTime: viewModel.currentTime,
+                            duration: viewModel.duration
+                        )
+                    } else {
+                        VideoPlayerView(player: player)
+                    }
                 } else {
                     placeholderView
                 }
@@ -114,10 +122,10 @@ struct VideoDetailView: View {
 
     private var placeholderView: some View {
         VStack(spacing: 8) {
-            Image(systemName: "film")
+            Image(systemName: "play.circle")
                 .font(.system(size: 48))
                 .foregroundStyle(.secondary)
-            Text("Select a video from the sidebar\nor drop one here")
+            Text("Select a media file from the sidebar\nor drop one here")
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.secondary)
         }

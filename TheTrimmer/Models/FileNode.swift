@@ -10,9 +10,19 @@ struct FileNode: Identifiable, Hashable {
     var children: [FileNode]?
 
     static let videoExtensions: Set<String> = ["mov", "mp4", "m4v", "avi", "mkv", "webm"]
+    static let audioExtensions: Set<String> = ["mp3", "wav", "flac", "aac", "m4a", "ogg"]
+    static let mediaExtensions: Set<String> = videoExtensions.union(audioExtensions)
 
     var isVideo: Bool {
         Self.videoExtensions.contains(url.pathExtension.lowercased())
+    }
+
+    var isAudio: Bool {
+        Self.audioExtensions.contains(url.pathExtension.lowercased())
+    }
+
+    var isMedia: Bool {
+        Self.mediaExtensions.contains(url.pathExtension.lowercased())
     }
 
     var formattedSize: String {

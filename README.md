@@ -1,8 +1,8 @@
 # TheTrimmer
 
-Fast macOS video trimmer using ffmpeg stream copy — O(1) speed, no re-encoding.
+Fast macOS media trimmer using ffmpeg stream copy — O(1) speed, no re-encoding.
 
-Includes a **GUI app** (SwiftUI) and a **CLI tool** for automation.
+Includes a **GUI app** (SwiftUI) and a **CLI tool** for automation. Supports both video and audio files.
 
 ## How It Works
 
@@ -10,9 +10,9 @@ TheTrimmer uses ffmpeg's **stream copy** mode (`-c copy`) to trim videos without
 
 - **Instant trimming** — a 2-hour 4K video trims in under a second
 - **Zero quality loss** — no generation loss since frames are copied as-is
-- **Any format** — works with MOV, MP4, MKV, AVI, WebM, M4V
+- **Any format** — works with MOV, MP4, MKV, AVI, WebM, M4V, MP3, WAV, FLAC, AAC, M4A, OGG
 
-The tradeoff is that cuts happen at the nearest keyframe, so trim points may be off by a fraction of a second (typically <0.5s for most video files).
+The tradeoff is that cuts happen at the nearest keyframe, so trim points may be off by a fraction of a second (typically <0.5s for most video files). Audio files trim with sample-level precision.
 
 ## Install CLI via Homebrew
 
@@ -32,10 +32,11 @@ swift build -c release
 
 ## CLI Usage
 
-### `trimmer info` — Show video metadata
+### `trimmer info` — Show media metadata
 
 ```bash
 trimmer info video.mov
+trimmer info song.mp3
 ```
 
 Output:
@@ -46,6 +47,17 @@ Duration:   0:09.633
 Resolution: 1668x1080
 Codec:      h264
 Size:       3.4 MB
+```
+
+For audio files:
+```
+File:       song.mp3
+Format:     MP3
+Duration:   3:42.100
+Codec:      mp3
+Sample Rate: 44.1 kHz
+Channels:   Stereo
+Size:       5.2 MB
 ```
 
 ### `trimmer extract` — Keep a time range
@@ -103,10 +115,11 @@ All commands accept flexible time formats:
 swift run TheTrimmer
 ```
 
-A native macOS SwiftUI app for visual video trimming:
+A native macOS SwiftUI app for visual media trimming:
 
 - **File browser sidebar** — navigate directories, sort by name/date/size, auto-refreshes when files change on disk
 - **Video player** — built-in AVPlayer with play/pause, draggable progress bar for seeking
+- **Audio waveform** — audio files display an interactive waveform visualization with playback position indicator
 - **Trim marker** — drag the red arrow to set a trim point, then click "Trim Left" or "Trim Right"
 - **Resizable panels** — drag the divider between sidebar and video player to resize
 - **Overwrite toggle** — optionally replace the original file instead of creating a new one

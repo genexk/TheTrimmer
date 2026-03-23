@@ -26,6 +26,11 @@ class TrimmerViewModel: ObservableObject {
         return trimPoint > 0 && trimPoint < duration
     }
 
+    var isAudioFile: Bool {
+        guard let ext = fileURL?.pathExtension.lowercased() else { return false }
+        return FileNode.audioExtensions.contains(ext)
+    }
+
     private func cleanup() {
         logger.debug("Cleaning up player state")
         if let existing = timeObserver {

@@ -249,17 +249,24 @@ public struct FFmpegRunner {
         let format = json["format"] as? [String: Any] ?? [:]
         let streams = json["streams"] as? [[String: Any]] ?? []
         let videoStream = streams.first { ($0["codec_type"] as? String) == "video" }
+        let audioStream = streams.first { ($0["codec_type"] as? String) == "audio" }
 
-        let durationStr = format["duration"] as? String ?? videoStream?["duration"] as? String ?? "0"
+        let durationStr = format["duration"] as? String ?? videoStream?["duration"] as? String ?? audioStream?["duration"] as? String ?? "0"
         let duration = Double(durationStr) ?? 0
 
         let fileSize = Int64(format["size"] as? String ?? "0") ?? 0
 
+        let sampleRateStr = audioStream?["sample_rate"] as? String
+        let channelsVal = audioStream?["channels"] as? Int
+
         return VideoInfo(
             duration: duration,
-            codec: videoStream?["codec_name"] as? String ?? "unknown",
+            codec: videoStream?["codec_name"] as? String ?? audioStream?["codec_name"] as? String ?? "unknown",
             width: videoStream?["width"] as? Int ?? 0,
             height: videoStream?["height"] as? Int ?? 0,
+            audioCodec: audioStream?["codec_name"] as? String,
+            sampleRate: sampleRateStr.flatMap { Int($0) },
+            channels: channelsVal,
             fileSize: fileSize,
             formatName: format["format_long_name"] as? String ?? format["format_name"] as? String ?? "unknown"
         )
@@ -271,8 +278,13 @@ public struct VideoInfo {
     public let codec: String
     public let width: Int
     public let height: Int
+    public let audioCodec: String?
+    public let sampleRate: Int?
+    public let channels: Int?
     public let fileSize: Int64
     public let formatName: String
+
+    public var isAudioOnly: Bool { width == 0 && height == 0 }
 
     public var formattedDuration: String {
         TimeParser.format(duration)
@@ -288,5 +300,22 @@ public struct VideoInfo {
 
     public var resolution: String {
         "\(width)x\(height)"
+    }
+
+    public var formattedSampleRate: String? {
+        guard let sr = sampleRate else { return nil }
+        if sr >= 1000 {
+            return "\(sr / 1000) kHz"
+        }
+        return "\(sr) Hz"
+    }
+
+    public var formattedChannels: String? {
+        guard let ch = channels else { return nil }
+        switch ch {
+        case 1: return "Mono"
+        case 2: return "Stereo"
+        default: return "\(ch) channels"
+        }
     }
 }

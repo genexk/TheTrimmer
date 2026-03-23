@@ -5,7 +5,7 @@ import TheTrimmerCore
 struct TrimCommand: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         commandName: "trim",
-        abstract: "Trim video at a point (keep left or right)"
+        abstract: "Trim media at a point (keep left or right)"
     )
 
     @Argument(help: "Input video file")

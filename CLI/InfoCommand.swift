@@ -5,10 +5,10 @@ import TheTrimmerCore
 struct InfoCommand: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         commandName: "info",
-        abstract: "Show video file information"
+        abstract: "Show media file information (video or audio)"
     )
 
-    @Argument(help: "Input video file")
+    @Argument(help: "Input media file")
     var input: String
 
     func run() async throws {
@@ -23,8 +23,21 @@ struct InfoCommand: AsyncParsableCommand {
         print("File:       \(url.lastPathComponent)")
         print("Format:     \(info.formatName)")
         print("Duration:   \(info.formattedDuration)")
-        print("Resolution: \(info.resolution)")
-        print("Codec:      \(info.codec)")
+        if info.isAudioOnly {
+            print("Codec:      \(info.audioCodec ?? info.codec)")
+            if let sr = info.formattedSampleRate {
+                print("Sample Rate: \(sr)")
+            }
+            if let ch = info.formattedChannels {
+                print("Channels:   \(ch)")
+            }
+        } else {
+            print("Resolution: \(info.resolution)")
+            print("Codec:      \(info.codec)")
+            if let ac = info.audioCodec {
+                print("Audio:      \(ac)")
+            }
+        }
         print("Size:       \(info.formattedSize)")
     }
 }

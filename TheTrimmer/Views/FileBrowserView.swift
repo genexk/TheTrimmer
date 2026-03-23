@@ -117,7 +117,7 @@ struct FileBrowserView: View {
 
     @ViewBuilder
     private func fileRow(_ file: FileNode) -> some View {
-        let icon = file.isDirectory ? "folder" : "film"
+        let icon = file.isDirectory ? "folder" : (file.isAudio ? "waveform" : "film")
         if viewModel.showDetails {
             HStack(spacing: 0) {
                 Label(file.name, systemImage: icon)

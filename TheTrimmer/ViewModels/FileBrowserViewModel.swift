@@ -52,7 +52,7 @@ class FileBrowserViewModel: ObservableObject {
         panel.canChooseFiles = false
         panel.canChooseDirectories = true
         panel.allowsMultipleSelection = false
-        panel.message = "Choose a folder containing video files"
+        panel.message = "Choose a folder containing media files"
 
         if panel.runModal() == .OK, let url = panel.url {
             addRoot(url)
@@ -144,10 +144,10 @@ class FileBrowserViewModel: ObservableObject {
             let values = try? item.resourceValues(forKeys: [.isDirectoryKey, .fileSizeKey, .creationDateKey])
             let isDir = values?.isDirectory ?? false
             if isDir {
-                if directoryHasVideos(item) {
+                if directoryHasMedia(item) {
                     children.append(FileNode(id: item, name: item.lastPathComponent, url: item, isDirectory: true, fileSize: 0, creationDate: values?.creationDate, children: nil))
                 }
-            } else if FileNode.videoExtensions.contains(item.pathExtension.lowercased()) {
+            } else if FileNode.mediaExtensions.contains(item.pathExtension.lowercased()) {
                 let size = Int64(values?.fileSize ?? 0)
                 let created = values?.creationDate
                 children.append(FileNode(id: item, name: item.lastPathComponent, url: item, isDirectory: false, fileSize: size, creationDate: created, children: nil))
@@ -157,14 +157,14 @@ class FileBrowserViewModel: ObservableObject {
         return FileNode(id: url, name: url.lastPathComponent, url: url, isDirectory: true, fileSize: 0, creationDate: nil, children: children)
     }
 
-    private func directoryHasVideos(_ url: URL) -> Bool {
+    private func directoryHasMedia(_ url: URL) -> Bool {
         guard let contents = try? fileManager.contentsOfDirectory(at: url, includingPropertiesForKeys: [.isDirectoryKey], options: [.skipsHiddenFiles]) else {
             return false
         }
         for item in contents {
             let isDir = (try? item.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false
             if isDir { return true }
-            if FileNode.videoExtensions.contains(item.pathExtension.lowercased()) { return true }
+            if FileNode.mediaExtensions.contains(item.pathExtension.lowercased()) { return true }
         }
         return false
     }
